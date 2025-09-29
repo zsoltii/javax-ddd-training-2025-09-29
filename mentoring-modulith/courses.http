@@ -1,0 +1,17 @@
+### Announce a course
+POST http://localhost:8080/api/courses
+Content-Type: application/json
+
+{
+  "code": "JAVAX-DDD",
+  "title": "Java and DDD"
+}
+
+### Validation error
+POST http://localhost:8080/api/courses
+Content-Type: application/json
+
+{
+  "code": "",
+  "title": "Java and DDD"
+}
