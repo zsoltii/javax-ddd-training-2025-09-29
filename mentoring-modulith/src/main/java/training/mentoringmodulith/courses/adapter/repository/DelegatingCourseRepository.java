@@ -2,7 +2,7 @@ package training.mentoringmodulith.courses.adapter.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import training.mentoringmodulith.courses.application.CourseRepository;
+import training.mentoringmodulith.courses.application.outboundport.CourseRepository;
 import training.mentoringmodulith.courses.domain.courses.Course;
 
 @Repository

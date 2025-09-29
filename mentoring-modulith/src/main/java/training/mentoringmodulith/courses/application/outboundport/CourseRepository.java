@@ -1,4 +1,4 @@
-package training.mentoringmodulith.courses.application;
+package training.mentoringmodulith.courses.application.outboundport;
 
 import training.mentoringmodulith.courses.domain.courses.Course;
 
