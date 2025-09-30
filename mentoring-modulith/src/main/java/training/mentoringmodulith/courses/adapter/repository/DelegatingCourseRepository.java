@@ -8,7 +8,9 @@ import training.mentoringmodulith.courses.application.outboundport.repo.CourseRe
 import training.mentoringmodulith.courses.domain.enrollments.Course;
 import training.mentoringmodulith.courses.domain.enrollments.CourseCode;
 import training.mentoringmodulith.courses.domain.enrollments.EmployeeId;
+import training.mentoringmodulith.courses.domain.enrollments.Enrollment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -18,15 +20,10 @@ public class DelegatingCourseRepository implements CourseRepository {
 
     private final CourseJpaRepository jpaRepository;
 
-    private final CourseMapper courseMapper;
-
     @Override
     public void save(Course course) {
-        var jpa = courseMapper.toEntity(course);
-        for (var enrollment : jpa.getEnrollments()) {
-            enrollment.setCourse(jpa);
-        }
-        jpaRepository.save(jpa);
+        var entity = toJpaEntity(course);
+        jpaRepository.save(entity);
     }
 
     @Override
@@ -42,11 +39,25 @@ public class DelegatingCourseRepository implements CourseRepository {
     @Override
     public Course findById(CourseCode courseCode) {
         var entity = jpaRepository.findByIdWithEnrollments(courseCode.value());
-        return courseMapper.toDomain(entity);
+        return toDomainEntity(entity);
     }
 
     @Override
     public List<Course> findAllEnrolled(EmployeeId employeeId) {
         return List.of();
+    }
+
+    private CourseJpaEntity toJpaEntity(Course course) {
+        var enrollmentEntities = course.getEnrollments().stream().map(enrollment ->
+                new EnrollmentJpaEntity(enrollment.getId(), enrollment.getEmployee().value(), enrollment.getEnrollmentDate())).toList();
+        var entity = new CourseJpaEntity(course.getCode().value(), course.getTitle(), course.getLimit());
+        entity.addEnrollments(enrollmentEntities);
+        return entity;
+    }
+
+    private Course toDomainEntity(CourseJpaEntity courseJpaEntity) {
+        var enrollments = courseJpaEntity.getEnrollments().stream().map(enrollmentJpaEntity ->
+                new Enrollment(new EmployeeId(enrollmentJpaEntity.getEmployee()), enrollmentJpaEntity.getEnrollmentDate())).toList();
+        return new Course(new CourseCode(courseJpaEntity.getCode()), courseJpaEntity.getTitle(), courseJpaEntity.getLimit(), new ArrayList<>(enrollments));
     }
 }

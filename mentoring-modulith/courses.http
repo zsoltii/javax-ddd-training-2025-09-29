@@ -3,8 +3,8 @@ POST http://localhost:8080/api/courses
 Content-Type: application/json
 
 {
-  "code": "JAVAX-BDD",
-  "title": "Java and BDD",
+  "code": "JAVAX-DDD",
+  "title": "Java and DDD",
   "limit": 15
 }
 
@@ -25,6 +25,6 @@ POST http://localhost:8080/api/courses/JAVAX-DDD/enrollments
 Content-Type: application/json
 
 {
-  "employeeId": 666,
+  "employeeId": 1,
   "courseCode": "JAVAX-DDD"
 }

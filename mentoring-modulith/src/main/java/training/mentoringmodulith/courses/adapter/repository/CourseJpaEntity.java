@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Entity
 @NoArgsConstructor
@@ -26,4 +27,21 @@ public class CourseJpaEntity {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EnrollmentJpaEntity> enrollments = new ArrayList<>();
+
+    public CourseJpaEntity(String code, String title, int limit) {
+        this.code = code;
+        this.title = title;
+        this.limit = limit;
+    }
+
+    public void addEnrollment(EnrollmentJpaEntity enrollment) {
+        this.enrollments.add(enrollment);
+        enrollment.setCourse(this);
+    }
+
+    public void addEnrollments(List<EnrollmentJpaEntity> enrollmentEntities) {
+        for (var enrollment: enrollmentEntities) {
+            addEnrollment(enrollment);
+        }
+    }
 }
