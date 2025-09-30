@@ -15,3 +15,6 @@ Content-Type: application/json
   "code": "",
   "title": "Java and DDD"
 }
+
+### List all courses
+GET http://localhost:8080/api/courses
