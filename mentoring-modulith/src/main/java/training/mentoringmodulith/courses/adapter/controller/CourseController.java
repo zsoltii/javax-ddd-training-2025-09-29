@@ -1,12 +1,10 @@
 package training.mentoringmodulith.courses.adapter.controller;
 
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import training.mentoringmodulith.courses.application.inboundport.AnnouncementRequest;
-import training.mentoringmodulith.courses.application.inboundport.CourseDto;
-import training.mentoringmodulith.courses.application.inboundport.CourseQueryService;
-import training.mentoringmodulith.courses.application.inboundport.CourseService;
+import training.mentoringmodulith.courses.application.inboundport.*;
 
 import java.util.List;
 
@@ -28,5 +26,14 @@ public class CourseController {
     @GetMapping
     public List<CourseDto> findAll() {
         return queryService.findAll();
+    }
+
+    @PostMapping("/{courseCode}/enrollments")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void enroll(@PathVariable String courseCode, @RequestBody EnrollmentRequest request) {
+        if (!courseCode.equals(request.courseCode())) {
+            throw new IllegalArgumentException("Course code in path and request body don't match!");
+        }
+        service.enroll(request);
     }
 }

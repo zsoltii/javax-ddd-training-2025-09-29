@@ -1,8 +1,8 @@
 package training.mentoringmodulith.courses.application.outboundport;
 
 import training.mentoringmodulith.courses.application.inboundport.CourseDto;
-import training.mentoringmodulith.courses.domain.courses.Course;
-import training.mentoringmodulith.courses.domain.courses.CourseCode;
+import training.mentoringmodulith.courses.domain.enrollments.Course;
+import training.mentoringmodulith.courses.domain.enrollments.CourseCode;
 
 import java.util.List;
 
@@ -12,4 +12,6 @@ public interface CourseRepository {
     boolean existsWithCode(CourseCode code);
 
     List<CourseDto> findAll();
+
+    Course findById(CourseCode courseCode);
 }

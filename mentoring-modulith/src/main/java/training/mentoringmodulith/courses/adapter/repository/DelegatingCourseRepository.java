@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import training.mentoringmodulith.courses.application.inboundport.CourseDto;
 import training.mentoringmodulith.courses.application.outboundport.CourseRepository;
-import training.mentoringmodulith.courses.domain.courses.Course;
-import training.mentoringmodulith.courses.domain.courses.CourseCode;
+import training.mentoringmodulith.courses.domain.enrollments.Course;
+import training.mentoringmodulith.courses.domain.enrollments.CourseCode;
 
 import java.util.List;
 
@@ -29,5 +29,10 @@ public class DelegatingCourseRepository implements CourseRepository {
     @Override
     public List<CourseDto> findAll() {
         return jpaRepository.findAllDto();
+    }
+
+    @Override
+    public Course findById(CourseCode courseCode) {
+        return jpaRepository.findByIdWithEnrollments(courseCode.value());
     }
 }
