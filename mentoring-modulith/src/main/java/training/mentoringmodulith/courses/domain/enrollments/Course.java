@@ -2,6 +2,8 @@ package training.mentoringmodulith.courses.domain.enrollments;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.jmolecules.ddd.annotation.Entity;
+import org.jmolecules.ddd.annotation.Identity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,8 +12,10 @@ import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
+@Entity
 public class Course {
 
+    @Identity
     private final CourseCode code;
 
     private final String title;
@@ -55,5 +59,10 @@ public class Course {
         return enrollments.stream()
                 .map(e -> new EnrollmentVO(e.getEmployee(), e.getEnrollmentDate()))
                 .toList();
+    }
+
+    public void cancelEnrollment(EmployeeId employeeId) {
+        Objects.requireNonNull(employeeId, "Employee ID must not be null!");
+        enrollments.removeIf(e -> e.getEmployee().equals(employeeId));
     }
 }

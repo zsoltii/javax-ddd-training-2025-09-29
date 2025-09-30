@@ -1,11 +1,12 @@
 package training.mentoringmodulith.courses.domain.enrollments;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
+import org.jmolecules.ddd.annotation.Entity;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Getter
 public class Enrollment {
 
