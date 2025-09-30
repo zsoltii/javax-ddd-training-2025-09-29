@@ -3,7 +3,6 @@ package training.mentoringmodulith.courses.adapter.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import training.mentoringmodulith.courses.application.inboundport.CourseDto;
-import training.mentoringmodulith.courses.domain.enrollments.Course;
 
 import java.util.List;
 
@@ -20,4 +19,15 @@ public interface CourseJpaRepository extends JpaRepository<CourseJpaEntity, Stri
             c.code = :code
     """)
     CourseJpaEntity findByIdWithEnrollments(String code);
+
+    @Query("""
+        select distinct c from CourseJpaEntity c 
+            left join fetch c.enrollments
+        where c.code in (
+            select e.course.code from EnrollmentJpaEntity e 
+            where e.employee = :employeeId
+        )
+    """)
+
+    List<CourseJpaEntity> findAllEnrolled(long employeeId);
 }

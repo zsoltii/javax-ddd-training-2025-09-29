@@ -38,13 +38,14 @@ public class DelegatingCourseRepository implements CourseRepository {
 
     @Override
     public Course findById(CourseCode courseCode) {
-        var entity = jpaRepository.findByIdWithEnrollments(courseCode.value());
-        return toDomainEntity(entity);
+        var jpaEntity = jpaRepository.findByIdWithEnrollments(courseCode.value());
+        return toDomainEntity(jpaEntity);
     }
 
     @Override
     public List<Course> findAllEnrolled(EmployeeId employeeId) {
-        return List.of();
+        var jpaEntities = jpaRepository.findAllEnrolled(employeeId.value());
+        return jpaEntities.stream().map(this::toDomainEntity).toList();
     }
 
     private CourseJpaEntity toJpaEntity(Course course) {
