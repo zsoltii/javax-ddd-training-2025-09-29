@@ -2,7 +2,7 @@ package training.mentoringmodulith.courses.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import training.mentoringmodulith.courses.application.inboundport.CourseDto;
+import training.mentoringmodulith.courses.application.inboundport.dto.CourseDto;
 import training.mentoringmodulith.courses.application.inboundport.CourseQueryService;
 import training.mentoringmodulith.courses.application.outboundport.repo.CourseRepository;
 

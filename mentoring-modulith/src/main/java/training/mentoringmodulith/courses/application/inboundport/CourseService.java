@@ -1,6 +1,8 @@
 package training.mentoringmodulith.courses.application.inboundport;
 
 import org.jmolecules.architecture.hexagonal.Port;
+import training.mentoringmodulith.courses.application.inboundport.dto.AnnouncementRequest;
+import training.mentoringmodulith.courses.application.inboundport.dto.EnrollmentRequest;
 
 @Port
 public interface CourseService {

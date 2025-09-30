@@ -1,10 +1,12 @@
 package training.mentoringmodulith.courses.adapter.controller;
 
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import training.mentoringmodulith.courses.application.inboundport.*;
+import training.mentoringmodulith.courses.application.inboundport.dto.AnnouncementRequest;
+import training.mentoringmodulith.courses.application.inboundport.dto.CourseDto;
+import training.mentoringmodulith.courses.application.inboundport.dto.EnrollmentRequest;
 
 import java.util.List;
 

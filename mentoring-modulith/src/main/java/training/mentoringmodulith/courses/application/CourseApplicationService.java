@@ -2,9 +2,9 @@ package training.mentoringmodulith.courses.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import training.mentoringmodulith.courses.application.inboundport.AnnouncementRequest;
+import training.mentoringmodulith.courses.application.inboundport.dto.AnnouncementRequest;
 import training.mentoringmodulith.courses.application.inboundport.CourseService;
-import training.mentoringmodulith.courses.application.inboundport.EnrollmentRequest;
+import training.mentoringmodulith.courses.application.inboundport.dto.EnrollmentRequest;
 import training.mentoringmodulith.courses.application.usecase.AnnouncementUseCase;
 import training.mentoringmodulith.courses.application.usecase.EmployeeHasLeavedUseCase;
 import training.mentoringmodulith.courses.application.usecase.EnrollmentUseCase;

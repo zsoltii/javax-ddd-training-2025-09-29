@@ -1,4 +1,4 @@
-package training.mentoringmodulith.courses.adapter.repository;
+package training.mentoringmodulith.courses.adapter.repository.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

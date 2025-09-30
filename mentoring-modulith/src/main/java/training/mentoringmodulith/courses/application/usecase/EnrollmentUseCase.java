@@ -2,10 +2,9 @@ package training.mentoringmodulith.courses.application.usecase;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import training.mentoringmodulith.courses.application.inboundport.EnrollmentRequest;
+import training.mentoringmodulith.courses.application.inboundport.dto.EnrollmentRequest;
 import training.mentoringmodulith.courses.application.outboundport.gateway.EmployeesGateway;
 import training.mentoringmodulith.courses.application.outboundport.repo.CourseRepository;
-import training.mentoringmodulith.courses.domain.enrollments.Course;
 import training.mentoringmodulith.courses.domain.enrollments.CourseCode;
 import training.mentoringmodulith.courses.domain.enrollments.EmployeeId;
 

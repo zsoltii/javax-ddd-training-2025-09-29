@@ -1,4 +1,4 @@
-package training.mentoringmodulith.courses.adapter.repository;
+package training.mentoringmodulith.courses.adapter.repository.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Entity
 @NoArgsConstructor
