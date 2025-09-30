@@ -1,0 +1,30 @@
+### Announce a course
+POST http://localhost:8080/api/courses
+Content-Type: application/json
+
+{
+  "code": "JAVAX-BDD",
+  "title": "Java and BDD",
+  "limit": 15
+}
+
+### Validation error
+POST http://localhost:8080/api/courses
+Content-Type: application/json
+
+{
+  "code": "",
+  "title": "Java and DDD"
+}
+
+### List all courses
+GET http://localhost:8080/api/courses
+
+### Enroll
+POST http://localhost:8080/api/courses/JAVAX-DDD/enrollments
+Content-Type: application/json
+
+{
+  "employeeId": 3,
+  "courseCode": "JAVAX-DDD"
+}
