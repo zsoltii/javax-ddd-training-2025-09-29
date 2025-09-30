@@ -1,5 +1,6 @@
 package training.mentoringmodulith.courses.domain.enrollments;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
+@AllArgsConstructor
 public class Course {
 
     private final CourseCode code;
@@ -49,7 +51,7 @@ public class Course {
         return new EnrollmentVO(employeeId, enrollment.getEnrollmentDate());
     }
 
-    public List<EnrollmentVO> getEnrollments() {
+    public List<EnrollmentVO> getEnrollmentVOs() {
         return enrollments.stream()
                 .map(e -> new EnrollmentVO(e.getEmployee(), e.getEnrollmentDate()))
                 .toList();

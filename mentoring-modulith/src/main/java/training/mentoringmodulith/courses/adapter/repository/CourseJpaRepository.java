@@ -16,7 +16,7 @@ public interface CourseJpaRepository extends JpaRepository<CourseJpaEntity, Stri
     List<CourseDto> findAllDto();
 
     @Query("""
-        select c from CourseJpaEntity c join fetch c.enrollments where
+        select c from CourseJpaEntity c left join fetch c.enrollments where
             c.code = :code
     """)
     CourseJpaEntity findByIdWithEnrollments(String code);

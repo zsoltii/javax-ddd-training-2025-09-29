@@ -3,8 +3,9 @@ POST http://localhost:8080/api/courses
 Content-Type: application/json
 
 {
-  "code": "JAVAX-DDD",
-  "title": "Java and DDD"
+  "code": "JAVAX-BDD",
+  "title": "Java and BDD",
+  "limit": 15
 }
 
 ### Validation error
@@ -18,3 +19,12 @@ Content-Type: application/json
 
 ### List all courses
 GET http://localhost:8080/api/courses
+
+### Enroll
+POST http://localhost:8080/api/courses/JAVAX-DDD/enrollments
+Content-Type: application/json
+
+{
+  "employeeId": 3,
+  "courseCode": "JAVAX-DDD"
+}

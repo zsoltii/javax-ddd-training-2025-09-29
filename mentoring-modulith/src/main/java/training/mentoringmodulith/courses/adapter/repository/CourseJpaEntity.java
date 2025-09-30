@@ -1,9 +1,6 @@
 package training.mentoringmodulith.courses.adapter.repository;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +21,9 @@ public class CourseJpaEntity {
 
     private String title;
 
+    @Column(name = "enrollment_limit")
     private int limit;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EnrollmentJpaEntity> enrollments = new ArrayList<>();
 }

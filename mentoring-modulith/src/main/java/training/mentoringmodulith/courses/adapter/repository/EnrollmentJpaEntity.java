@@ -15,7 +15,7 @@ public class EnrollmentJpaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private long employeeId;
+    private long employee;
 
     private LocalDateTime enrollmentDate;
 

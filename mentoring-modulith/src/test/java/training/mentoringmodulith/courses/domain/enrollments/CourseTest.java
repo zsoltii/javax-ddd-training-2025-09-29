@@ -35,7 +35,7 @@ class CourseTest {
         void enroll() {
             var id = new EmployeeId(10);
             course.enroll(id);
-            assertThat(course.getEnrollments())
+            assertThat(course.getEnrollmentVOs())
                 .extracting(EnrollmentVO::employeeId)
                 .containsExactly(id);
         }

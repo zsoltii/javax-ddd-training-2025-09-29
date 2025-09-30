@@ -19,7 +19,7 @@ public class AnnouncementUseCase {
             throw new IllegalArgumentException("Course with code %s already exists!".formatted(
                     code.value()));
         }
-        var course = Course.announce(code, request.title(), 0);
+        var course = Course.announce(code, request.title(), request.limit());
         courseRepository.save(course);
     }
 }

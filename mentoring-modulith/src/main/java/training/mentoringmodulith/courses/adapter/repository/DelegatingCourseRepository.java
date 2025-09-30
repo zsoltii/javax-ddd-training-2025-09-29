@@ -15,9 +15,14 @@ public class DelegatingCourseRepository implements CourseRepository {
 
     private final CourseJpaRepository jpaRepository;
 
+    private final CourseMapper courseMapper;
+
     @Override
     public void save(Course course) {
-        var jpa = new CourseJpaEntity(course.getCode().value(), course.getTitle());
+        var jpa = courseMapper.toEntity(course);
+        for (var enrollment : jpa.getEnrollments()) {
+            enrollment.setCourse(jpa);
+        }
         jpaRepository.save(jpa);
     }
 
@@ -33,6 +38,7 @@ public class DelegatingCourseRepository implements CourseRepository {
 
     @Override
     public Course findById(CourseCode courseCode) {
-        return jpaRepository.findByIdWithEnrollments(courseCode.value());
+        var entity = jpaRepository.findByIdWithEnrollments(courseCode.value());
+        return courseMapper.toDomain(entity);
     }
 }
