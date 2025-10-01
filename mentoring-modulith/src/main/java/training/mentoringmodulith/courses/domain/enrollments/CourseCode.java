@@ -1,5 +1,8 @@
 package training.mentoringmodulith.courses.domain.enrollments;
 
+import org.jmolecules.ddd.annotation.ValueObject;
+
+@ValueObject
 public record CourseCode(String value) {
 
     public CourseCode {

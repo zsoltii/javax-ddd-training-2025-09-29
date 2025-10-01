@@ -1,4 +1,4 @@
-package training.mentoringmodulith.courses.adapter.repository;
+package training.mentoringmodulith.courses.adapter.repository.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,4 +26,21 @@ public class CourseJpaEntity {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EnrollmentJpaEntity> enrollments = new ArrayList<>();
+
+    public CourseJpaEntity(String code, String title, int limit) {
+        this.code = code;
+        this.title = title;
+        this.limit = limit;
+    }
+
+    public void addEnrollment(EnrollmentJpaEntity enrollment) {
+        this.enrollments.add(enrollment);
+        enrollment.setCourse(this);
+    }
+
+    public void addEnrollments(List<EnrollmentJpaEntity> enrollmentEntities) {
+        for (var enrollment: enrollmentEntities) {
+            addEnrollment(enrollment);
+        }
+    }
 }

@@ -1,9 +1,12 @@
 package training.mentoringmodulith.employees.application;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import training.mentoringmodulith.courses.application.inboundport.CourseService;
 import training.mentoringmodulith.employees.application.inbound.EmployeeApplicationService;
-import training.mentoringmodulith.employees.application.outbound.EmployeeRepository;
+import training.mentoringmodulith.employees.application.outbound.gateway.EmployeeHasLeaved;
+import training.mentoringmodulith.employees.application.outbound.repo.EmployeeRepository;
 import training.mentoringmodulith.employees.domain.employees.Employee;
 import training.mentoringmodulith.employees.domain.employees.EmployeeId;
 import training.mentoringmodulith.employees.application.inbound.EmployeeDto;
@@ -19,6 +22,11 @@ public class DelegatingEmployeeApplicationService implements EmployeeApplication
 
     private final EmployeeMapper mapper;
 
+    private final ApplicationEventPublisher eventPublisher;
+
+    // Egyrészt nem nyitott package, másrészt körkörös modul hivatkozás, a ModulithTest megfogja
+    // private final CourseService courseService;
+
     @Override
     public EmployeeDto join(EmployeeDto employee) {
         Employee entity = mapper.toEntity(employee);
@@ -29,6 +37,7 @@ public class DelegatingEmployeeApplicationService implements EmployeeApplication
     @Override
     public void leave(EmployeeId employeeId) {
         repository.deleteById(employeeId);
+        eventPublisher.publishEvent(new EmployeeHasLeaved(employeeId.value()));
     }
 
     @Override
